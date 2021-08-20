@@ -1,0 +1,33 @@
+:root {
+    font-size: 62.5%;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+  
+body {
+    background-color: #121212;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    gap: 5px;
+}
+
+.squares {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    color: white;
+    font-size: 70px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
