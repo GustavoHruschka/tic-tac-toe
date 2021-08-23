@@ -1,43 +1,38 @@
 import React, { useState } from 'react'
-import checkResult from '../utils/checkResult'
+import checkBoard from '../utils/checkBoard'
 
 function Home() {
-    type board = Array<Array<null | 'X' | 'O'>>
     type player = 'X' | 'O'
+    type square = '' | player
+    type board = [
+        square, square, square,
+        square, square, square,
+        square, square, square,
+    ]
 
-
-    const [squares, setSquares] = useState<board>([
-        [null, null, null],
-        [null, null, null],
-        [null, null, null]
+    const [currentBoard, setCurrentBoard] = useState<board>([
+        '', '', '',
+        '', '', '',
+        '', '', ''
     ])
     const [currentPlayer, setCurrentPlayer] = useState<player>('X')
     const [isGameOver, setIsGameover] = useState(false)
 
-    function handlePlay(currentState: null | string, rowNumber: number, columnNumber: number) {
+    function handlePlay(squareNumber: number) {
         if (isGameOver) {
             return
         }
 
-        if (currentState === null) {
-            const squaresCopy = squares
+        if (currentBoard[squareNumber] === '') {
+            const currentBoardCopy = currentBoard
+            currentBoardCopy[squareNumber] = currentPlayer
 
-            if (squaresCopy[rowNumber][columnNumber] === null) {
-                squaresCopy[rowNumber][columnNumber] = currentPlayer
+            setCurrentBoard(currentBoardCopy)
 
-                setSquares(squaresCopy)
-
-                const result = checkResult(squaresCopy)            
-                if (result != null) {
-                    setIsGameover(true)
-                    return
-                }
-
-                if (currentPlayer === 'X') {
-                    setCurrentPlayer('O')
-                } else {
-                    setCurrentPlayer('X')
-                }
+            if (currentPlayer === 'X') {
+                setCurrentPlayer('O')
+            } else {
+                setCurrentPlayer('X')
             }
         }
     }
@@ -45,19 +40,15 @@ function Home() {
     return (
         <main>
             <div className="game-container">
-                {squares.map((row, rowNumber) => {
+                {currentBoard.map((squareValue, squareNumber) => {
                     return (
-                        row.map((currentState, columnNumber) => {
-                            return (
-                                <div
-                                    className="squares"
-                                    key={`${rowNumber}${columnNumber}`}
-                                    onClick={() => handlePlay(currentState, rowNumber, columnNumber)}
-                                >
-                                    {currentState}
-                                </div>
-                            )
-                        })
+                        <div 
+                            className="square"
+                            key={squareNumber}
+                            onClick={() => {handlePlay(squareNumber)}}
+                        >
+                            {squareValue}
+                        </div>
                     )
                 })}
             </div>

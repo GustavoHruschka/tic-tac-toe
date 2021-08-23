@@ -16,18 +16,19 @@ body {
 .game-container {
     display: grid;
     grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
     gap: 5px;
 }
 
-.squares {
-    height: 150px;
-    width: 150px;
+.square {
     background-color: red;
     color: white;
     font-size: 70px;
     cursor: pointer;
+    border-radius: 5px;
 
     display: flex;
     align-items: center;
     justify-content: center
 }
+
