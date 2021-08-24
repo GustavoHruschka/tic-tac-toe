@@ -25,7 +25,7 @@ describe('Board positions are beeing interpreted correctly', () => {
 
     test('A board that has a win on a row returns true?', () => {
         expect(checkBoard([
-            'X', 'O', 'O',
+            'O', 'X', 'O',
             'X', 'X', 'X',
             'O', 'O', 'X'
         ])).toBe(true)

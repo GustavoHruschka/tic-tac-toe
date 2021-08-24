@@ -24,8 +24,13 @@ function Home() {
         }
 
         if (currentBoard[squareNumber] === '') {
+            console.log('triggered handlePlay()')
+
+            
             const currentBoardCopy = currentBoard
             currentBoardCopy[squareNumber] = currentPlayer
+
+            checkBoard(currentBoardCopy)
 
             setCurrentBoard(currentBoardCopy)
 
