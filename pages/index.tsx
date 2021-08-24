@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TicTacToeGame from '../components/ticTacToeGame'
 import checkBoard from '../utils/checkBoard'
 
 function Home() {
@@ -16,47 +17,19 @@ function Home() {
         '', '', ''
     ])
     const [currentPlayer, setCurrentPlayer] = useState<player>('X')
-    const [isGameOver, setIsGameover] = useState(false)
-
-    function handlePlay(squareNumber: number) {
-        if (isGameOver) {
-            return
-        }
-
-        if (currentBoard[squareNumber] === '') {
-            console.log('triggered handlePlay()')
-
-            
-            const currentBoardCopy = currentBoard
-            currentBoardCopy[squareNumber] = currentPlayer
-
-            checkBoard(currentBoardCopy)
-
-            setCurrentBoard(currentBoardCopy)
-
-            if (currentPlayer === 'X') {
-                setCurrentPlayer('O')
-            } else {
-                setCurrentPlayer('X')
-            }
-        }
-    }
+    const [isGameOver, setIsGameOver] = useState(false)
 
     return (
         <main>
-            <div className="game-container">
-                {currentBoard.map((squareValue, squareNumber) => {
-                    return (
-                        <div 
-                            className="square"
-                            key={squareNumber}
-                            onClick={() => {handlePlay(squareNumber)}}
-                        >
-                            {squareValue}
-                        </div>
-                    )
-                })}
-            </div>
+            <TicTacToeGame
+                currentBoard={currentBoard}
+                currentPlayer= {currentPlayer}
+                isGameOver={isGameOver}
+
+                setCurrentBoard={setCurrentBoard}
+                setCurrentPlayer={setCurrentPlayer}
+                setIsGameOver={setIsGameOver}
+            />
             {
                 isGameOver ?
                     <section className="result">

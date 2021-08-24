@@ -9,30 +9,30 @@ type board = [
 ]
 
 function checkBoard(currentBoard: board) {
-    // returns true if the game is over, and false otherwise
+    // returns true if the game is over and false otherwise
 
     // check rows
     for (let c = 0; c <= 8; c += 3) {
-        if (allEqual(currentBoard.slice(c, c + 3))) {
-            return true
+        if (currentBoard[c] != '' && allEqual(currentBoard.slice(c, c + 3))) {
+            return [c, c + 1, c + 2]
         }
     }
 
     // check columns
     for (let c = 0; c <= 2; c++) {
-        if (allEqual([currentBoard[c], currentBoard[c + 3], currentBoard[c + 6]])) {
-            return true
+        if (currentBoard[c] != '' && allEqual([currentBoard[c], currentBoard[c + 3], currentBoard[c + 6]])) {
+            return [c, c + 3, c + 6]
         }
     }
 
     // check main diagonal
-    if (allEqual([currentBoard[0], currentBoard[4], currentBoard[8]])) {
-        return true
+    if (currentBoard[0] != '' && allEqual([currentBoard[0], currentBoard[4], currentBoard[8]])) {
+        return [0, 4, 8]
     }
 
     // check secondary diagonal
-    if (allEqual([currentBoard[2], currentBoard[4], currentBoard[6]])) {
-        return true
+    if (currentBoard[2] != '' && allEqual([currentBoard[2], currentBoard[4], currentBoard[6]])) {
+        return [2, 4, 6]
     }
 
     return false

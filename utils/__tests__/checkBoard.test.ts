@@ -1,6 +1,14 @@
 import checkBoard from "../checkBoard";
 
 describe('Board positions are beeing interpreted correctly', () => {
+    test('An empty board returns false?', () => {
+        expect(checkBoard([
+            '', '', '',
+            '', '', '',
+            '', '', ''
+        ])).toBe(false)
+    })
+
     test('A board that has no wins returns false?', () => {
         expect(checkBoard([
             'X', 'O', 'X',
@@ -9,18 +17,18 @@ describe('Board positions are beeing interpreted correctly', () => {
         ])).toBe(false)
     })
 
-    test('A board that has a win on a diagonal returns true?', () => {
+    test('A board that has a win on a diagonal returns a list with the winning indexes?', () => {
         expect(checkBoard([
             'X', 'O', 'O',
             'O', 'X', 'X',
             'X', 'O', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([0, 4, 8])
 
         expect(checkBoard([
             'X', 'O', 'X',
             'O', 'X', 'X',
             'X', 'O', 'O'
-        ])).toBe(true)
+        ])).toStrictEqual([2, 4, 6])
     })
 
     test('A board that has a win on a row returns true?', () => {
@@ -28,38 +36,38 @@ describe('Board positions are beeing interpreted correctly', () => {
             'O', 'X', 'O',
             'X', 'X', 'X',
             'O', 'O', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([3, 4, 5])
 
         expect(checkBoard([
             'O', 'O', 'O',
             'O', 'X', 'X',
             'X', 'X', 'O'
-        ])).toBe(true)
+        ])).toStrictEqual([0, 1, 2])
 
         expect(checkBoard([
             'X', 'O', 'O',
             'O', 'X', 'X',
             'X', 'X', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([6, 7, 8])
     })
 
-    test('A board that has a win on a columns returns true?', () => {
+    test('A board that has a win on a column returns true?', () => {
         expect(checkBoard([
             'X', 'O', 'O',
             'X', 'X', 'O',
             'X', 'O', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([0, 3, 6])
 
         expect(checkBoard([
             'X', 'O', 'O',
             'O', 'O', 'X',
             'X', 'O', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([1, 4, 7])
 
         expect(checkBoard([
             'X', 'O', 'X',
             'O', 'X', 'X',
             'O', 'O', 'X'
-        ])).toBe(true)
+        ])).toStrictEqual([2, 5, 8])
     })
 })
